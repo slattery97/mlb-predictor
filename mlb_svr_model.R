@@ -1,4 +1,8 @@
 # MLB Support Vector Regression
+# Import Dependencies
+# install.packages('caTools')
+# install.packages('e1071')
+# install.packages('ggplot2')
 
 # Importing the dataset
 dataset = read.csv('WSox_OverUnder_Data.csv')
@@ -11,7 +15,6 @@ dataset$State = factor(dataset$HomeAway,
 
 
 # Splitting the dataset into the Training set and Test set
-# install.packages('caTools')
 library(caTools)
 set.seed(123)
 split = sample.split(dataset$TotalRuns, SplitRatio = 0.8)
@@ -23,7 +26,6 @@ test_set = subset(dataset, split == FALSE)
 # test_set = scale(test_set)
 
 # Fitting SVR to the dataset
-# install.packages('e1071')
 library(e1071)
 regressor = svm(formula = TotalRuns ~ SIERA,
                 data = dataset,
@@ -54,7 +56,6 @@ write.csv(datasetTesting, file = 'mlb-svr-results-test.csv')
 
 
 # Visualizing the SVR results
-# install.packages('ggplot2')
 library(ggplot2)
 x_grid = seq(min(dataset$SIERA), max(dataset$SIERA), 0.1)
 ggplot() +
